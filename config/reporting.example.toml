@@ -1,0 +1,34 @@
+[storage]
+sqlite_path = "var/authoritative_pnl.sqlite3"
+output_dir = "out"
+
+[sources.activity]
+endpoint_url = ""
+api_key_env = "POLYMARKET_API_KEY"
+page_size = 200
+rate_limit_per_second = 2.0
+include_deposits_withdrawals = true
+
+[sources.account_registry]
+path = ""
+
+[sources.runtime_log]
+paths = []
+midpoint_offset_seconds = 450
+midpoint_window_seconds = 180
+
+[sources.market_registry]
+canonical_dir = ""
+legacy_dir = ""
+
+[sources.market_resolution]
+path = ""
+
+[quality]
+freshness_sla_seconds = 1800
+unknown_attribution_threshold = 0.05
+suspicious_gap_seconds = 86400
+
+[api]
+host = "127.0.0.1"
+port = 8080

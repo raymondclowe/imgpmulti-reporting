@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "authoritative-pnl"
+version = "0.1.0"
+description = "Standalone authoritative P&L reporting built from raw source-of-truth inputs"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Data/Reporting" }]
+dependencies = []
+
+[project.optional-dependencies]
+parquet = ["pyarrow>=15"]
+
+[project.scripts]
+authoritative-pnl = "authoritative_pnl.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

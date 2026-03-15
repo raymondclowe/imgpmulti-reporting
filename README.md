@@ -1,6 +1,31 @@
 # imgpmulti-reporting
 Reporting only on the imgpmulti node fleet data
 
+## Implementation Status
+
+This repository now contains a working first implementation of the standalone authoritative P&L system described below.
+
+Implemented components:
+
+- Raw activity ingestion into SQLite from a configured authoritative activity endpoint
+- Raw runtime-log, canonical-registry, legacy-lookup, and resolution ingestion
+- Deterministic attribution with precedence: runtime midpoint, canonical registry, legacy lookup, then `UNKNOWN`
+- Pro-rata allocation of non-trade events across existing strategy share exposure within `(wallet_address, slug)`
+- P&L fact generation for market, strategy, wallet, and daily views
+- Quality checks, reconciliation summary, CSV/JSON materialization, and a minimal HTTP API
+
+Non-negotiable rule enforced in code:
+
+- No journal data is read for financial calculations
+
+Quick start:
+
+```bash
+python3 -m venv .venv
+PYTHONPATH=src .venv/bin/python -m authoritative_pnl.cli --config config/reporting.example.toml init-db
+PYTHONPATH=src .venv/bin/python -m authoritative_pnl.cli --config config/reporting.example.toml run-all
+```
+
 # Standalone Authoritative P&L Repository - Design Document
 
 Version: 1.0
